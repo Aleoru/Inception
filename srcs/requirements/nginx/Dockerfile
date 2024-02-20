@@ -1,6 +1,6 @@
 FROM	debian:11
 
-RUN	apt update && apt upgrade
+RUN	apt update -y && apt upgrade -y
 RUN	apt install -y nginx vim curl
 RUN	mkdir -p /etc/nginx/ssl
 RUN	apt install -y openssl
