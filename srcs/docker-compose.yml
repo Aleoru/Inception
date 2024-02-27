@@ -21,21 +21,23 @@ networks:
     driver: bridge
 
 services:
-  #nginx:
-  #container_name: nginx
-  #build: ./requirements/nginx/
-  #ports:
-  #  - "443:443"
-  #depends_on:
-  #  - wordpress
-  #volumes:
-  #  - wordpress:/var/www/html
-  #networks:
-  #  - inception
-  #restart: unless-stopped
+  nginx:
+    container_name: nginx
+    build: ./requirements/nginx/
+    ports:
+      - "443:443"
+    depends_on:
+      - wordpress
+    volumes:
+      - wordpress:/var/www/html
+    networks:
+      - inception
+    restart: unless-stopped
   wordpress:
     container_name: wordpress
     build: ./requirements/wordpress/
+    ports:
+      - "9000:9000"
     depends_on:
       - mariadb
     volumes:
@@ -57,4 +59,3 @@ services:
     restart: unless-stopped
     expose:
       - "3306"
-
