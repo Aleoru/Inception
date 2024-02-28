@@ -1,7 +1,10 @@
 #!/bin/bash
 
 service mariadb start
-sleep 10
+while ! mysqladmin ping -hlocalhost --silent; do
+	echo "Waiting to mariadb..."
+	sleep 1
+done
 
 mysql -e "CREATE DATABASE IF NOT EXISTS ${SQL_DB};"
 mysql -e "CREATE USER IF NOT EXISTS '${SQL_USER}'@'%' IDENTIFIED BY '${SQL_PWD}';"
