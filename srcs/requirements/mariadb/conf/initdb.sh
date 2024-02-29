@@ -1,13 +1,21 @@
 #!/bin/bash
 
+#mkdir -p /var/run/mysqld
+#chown mysql:mysql /var/run/mysqld
+#chmod 775 /var/run/mysqld
+
 service mariadb start
-while ! mysqladmin ping -hlocalhost --silent; do
+
+#STATUS=$(grep mariadb | wc -l);
+
+while ! mysqladmin ping -hlocalhost --silent;
+#while [ $STATUS -ne 0 ]
+do
+	#STATUS=$(grep mariadb | wc -l);
 	echo "Waiting to mariadb..."
 	sleep 1
 done
 
-mysql -e "CREATE DATABASE IF NOT EXISTS ${SQL_DB};"
-mysql -e "CREATE USER IF NOT EXISTS '${SQL_USER}'@'%' IDENTIFIED BY '${SQL_PWD}';"
-mysql -e "GRANT ALL PRIVILEGES ON ${SQL_DB}.* TO '${SQL_USER}'@'%' IDENTIFIED BY '${SQL_PWD}';"
-mysql -e "FLUSH PRIVILEGES;"
-mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${SQL_ROOT_PWD}';"
+sh /create.sh
+
+exec mysqld_safe
