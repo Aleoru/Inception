@@ -1,0 +1,1 @@
+sudo rm -rf /home/aoropeza/data/mariadb/* && sudo rm -rf /home/aoropeza/data/wordpress/* && rm logs.txt
