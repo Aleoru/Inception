@@ -1,7 +1,8 @@
 #!/bin/bash
 
 #mkdir -p /var/run/mysqld
-#chown mysql:mysql /var/run/mysqld
+#touch /var/run/mysqld/mysqld.sock
+#chown mysql:mysql -R /var/run/mysqld
 #chmod 775 /var/run/mysqld
 
 service mariadb start
