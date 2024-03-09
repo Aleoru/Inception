@@ -1,22 +1,17 @@
 #!/bin/bash
 
-#mkdir -p /var/run/mysqld
-#touch /var/run/mysqld/mysqld.sock
-#chown mysql:mysql -R /var/run/mysqld
-#chmod 775 /var/run/mysqld
-
 service mariadb start
 
-#STATUS=$(grep mariadb | wc -l);
-
-while ! mysqladmin ping -hlocalhost --silent;
-#while [ $STATUS -ne 0 ]
+while ! mariadb-admin ping -hlocalhost --silent;
 do
-	#STATUS=$(grep mariadb | wc -l);
 	echo "Waiting to mariadb..."
 	sleep 1
 done
 
-sh /create.sh
+if [ ! -d /var/lib/mysql/${SQL_DB} ]; then
+	sh /create.sh
+else
+	mariadb-admin -u root -p${SQL_ROOT_PWD} -hlocalhost shutdown
+fi
 
 exec mysqld_safe
