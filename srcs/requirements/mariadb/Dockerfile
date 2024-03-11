@@ -9,8 +9,8 @@ RUN chown mysql:mysql -R /var/run/mysqld/
 RUN chmod -R 755 /var/run/mysqld/
 
 COPY	conf/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
-COPY	conf/initdb.sh /
-COPY	conf/create.sh /
+COPY	tools/initdb.sh /
+COPY	tools/create.sh /
 RUN     chmod +x /initdb.sh
 RUN     chmod +x /create.sh
 EXPOSE	3306
